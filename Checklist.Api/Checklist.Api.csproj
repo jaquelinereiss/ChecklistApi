@@ -1,0 +1,77 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>2d754f8b-451f-4605-8ed8-8c9b059e3b39</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="obj\Debug\net8.0\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs" />
+    <Compile Include="obj\Debug\net8.0\Checklist.Api.AssemblyInfo.cs" />
+    <Compile Include="obj\Debug\net8.0\Checklist.Api.GlobalUsings.g.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="obj\Checklist.Api.csproj.nuget.dgspec.json" />
+    <Content Include="obj\Debug\net8.0\ApiEndpoints.json" />
+    <Content Include="obj\Debug\net8.0\Checklist.Api.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\net8.0\Checklist.Api.sourcelink.json" />
+    <Content Include="obj\Debug\net8.0\EndpointInfo\Checklist.Api.json" />
+    <Content Include="obj\Debug\net8.0\rpswa.dswa.cache.json" />
+    <Content Include="obj\Debug\net8.0\staticwebassets.references.upToDateCheck.txt" />
+    <Content Include="obj\Debug\net8.0\staticwebassets.removed.txt" />
+    <Content Include="obj\project.assets.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="obj\Checklist.Api.csproj.nuget.g.props" />
+    <None Include="obj\Checklist.Api.csproj.nuget.g.targets" />
+    <None Include="obj\Debug\net8.0\apphost.exe" />
+    <None Include="obj\Debug\net8.0\Checklist.Api.AssemblyInfoInputs.cache" />
+    <None Include="obj\Debug\net8.0\Checklist.Api.assets.cache" />
+    <None Include="obj\Debug\net8.0\Checklist.Api.csproj.AssemblyReference.cache" />
+    <None Include="obj\Debug\net8.0\Checklist.Api.csproj.BuildWithSkipAnalyzers" />
+    <None Include="obj\Debug\net8.0\Checklist.Api.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Debug\net8.0\Checklist.Api.GeneratedMSBuildEditorConfig.editorconfig" />
+    <None Include="obj\Debug\net8.0\Checklist.Api.MvcApplicationPartsAssemblyInfo.cache" />
+    <None Include="obj\Debug\net8.0\EndpointInfo\Checklist.Api.OpenApiFiles.cache" />
+    <None Include="obj\project.nuget.cache" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.28" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.11">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Checklist.Application\Checklist.Application.csproj" />
+    <ProjectReference Include="..\Checklist.Infrastructure\Checklist.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="bin\Debug\net8.0\cs\" />
+    <Folder Include="bin\Debug\net8.0\de\" />
+    <Folder Include="bin\Debug\net8.0\es\" />
+    <Folder Include="bin\Debug\net8.0\fr\" />
+    <Folder Include="bin\Debug\net8.0\it\" />
+    <Folder Include="bin\Debug\net8.0\ja\" />
+    <Folder Include="bin\Debug\net8.0\ko\" />
+    <Folder Include="bin\Debug\net8.0\pl\" />
+    <Folder Include="bin\Debug\net8.0\pt-BR\" />
+    <Folder Include="bin\Debug\net8.0\ru\" />
+    <Folder Include="bin\Debug\net8.0\tr\" />
+    <Folder Include="bin\Debug\net8.0\zh-Hans\" />
+    <Folder Include="bin\Debug\net8.0\zh-Hant\" />
+    <Folder Include="obj\Debug\net8.0\refint\" />
+    <Folder Include="obj\Debug\net8.0\ref\" />
+    <Folder Include="obj\Debug\net8.0\staticwebassets\" />
+  </ItemGroup>
+
+</Project>

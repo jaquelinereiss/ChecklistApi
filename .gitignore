@@ -1,0 +1,33 @@
+## Build
+bin/
+obj/
+
+## Visual Studio
+.vs/
+*.user
+*.suo
+
+## Rider
+.idea/
+
+## VS Code
+.vscode/
+
+## Arquivos de configuração locais
+appsettings.Development.json
+appsettings.json
+
+## Variáveis de ambiente
+.env
+.env.*
+
+## Certificados
+*.pfx
+*.snk
+
+## Logs
+*.log
+
+## Sistema
+Thumbs.db
+Desktop.ini
