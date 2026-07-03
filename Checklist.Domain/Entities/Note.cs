@@ -13,6 +13,5 @@ public class Note : BaseEntity
 
     public Checklist Checklist { get; set; } = null!;
 
-    public ICollection<SubNote> SubNotes { get; set; }
-        = new List<SubNote>();
+    public ICollection<SubNote> SubNotes { get; set; } = new List<SubNote>();
 }

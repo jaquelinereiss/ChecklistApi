@@ -11,6 +11,8 @@ public static class DependencyInjection
     {
         services.AddScoped<IChecklistRepository, ChecklistRepository>();
         services.AddScoped<IChecklistService, ChecklistService>();
+        services.AddScoped<INoteRepository, NoteRepository>();
+        services.AddScoped<INoteService, NoteService>();
 
         return services;
     }

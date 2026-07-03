@@ -4,8 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Checklist.Infrastructure.Persistence.Configurations;
 
-public class ChecklistConfiguration
-    : IEntityTypeConfiguration<ChecklistEntity>
+public class ChecklistConfiguration : IEntityTypeConfiguration<ChecklistEntity>
 {
     public void Configure(
         EntityTypeBuilder<ChecklistEntity> builder)
@@ -22,9 +21,9 @@ public class ChecklistConfiguration
             .HasMaxLength(200)
             .IsRequired();
 
-        //builder.HasMany(x => x.Notes)
-        //    .WithOne(x => x.Checklist)
-        //    .HasForeignKey(x => x.ChecklistId)
-        //    .OnDelete(DeleteBehavior.Restrict);
+        builder.HasMany(x => x.Notes)
+            .WithOne(x => x.Checklist)
+            .HasForeignKey(x => x.ChecklistId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }
