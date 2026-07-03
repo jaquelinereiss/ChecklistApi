@@ -20,7 +20,5 @@ public class SubNoteConfiguration
 
         builder.Property(x => x.Status)
             .IsRequired();
-
-        builder.HasQueryFilter(x => !x.IsDeleted);
     }
 }

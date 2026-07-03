@@ -21,8 +21,6 @@ public class NoteConfiguration
         builder.Property(x => x.Status)
             .IsRequired();
 
-        builder.HasQueryFilter(x => !x.IsDeleted);
-
         builder.HasMany(x => x.SubNotes)
             .WithOne(x => x.Note)
             .HasForeignKey(x => x.NoteId)

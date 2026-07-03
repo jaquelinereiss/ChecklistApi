@@ -1,6 +1,6 @@
+using Checklist.Application.Exceptions;
 using Checklist.Application.Features.Checklists.DTOs;
 using Checklist.Application.Interfaces;
-using Checklist.Domain.Entities;
 
 namespace Checklist.Application.Services;
 
@@ -21,7 +21,6 @@ public class ChecklistService : IChecklistService
         {
             Id = x.Id,
             Title = x.Title,
-            IsDeleted = x.IsDeleted,
             CreatedAt = x.CreatedAt
         }).ToList();
     }
@@ -33,7 +32,6 @@ public class ChecklistService : IChecklistService
             Id = Guid.NewGuid(),
             Title = request.Title,
             CreatedAt = DateTime.UtcNow,
-            IsDeleted = false,
             UserId = userId,
         };
 
@@ -44,5 +42,30 @@ public class ChecklistService : IChecklistService
             Id = checklist.Id,
             Message = "Checklist criado com sucesso."
         };
+    }
+
+    public async Task UpdateAsync(Guid userId, Guid checklistId, UpdateChecklistRequest request)
+    {
+        var checklist = await _repository.GetByIdAsync(checklistId);
+
+        if (checklist == null || checklist.UserId != userId)
+            throw new NotFoundException("Checklist não encontrado.");
+
+        checklist.Title = request.Title;
+        checklist.UpdatedAt = DateTime.UtcNow;
+
+        await _repository.UpdateAsync(checklist);
+
+    }
+
+    public async Task DeleteAsync(Guid userId, Guid checklistId)
+    {
+        var checklist = await _repository.GetByIdAsync(checklistId);
+
+        if (checklist == null || checklist.UserId != userId)
+            throw new NotFoundException("Checklist não encontrado.");
+
+        await _repository.DeleteAsync(checklist);
+
     }
 }

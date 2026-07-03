@@ -9,5 +9,4 @@ public class Checklist : BaseEntity
     public string Title { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
-    public bool IsDeleted { get; set; }
 }
