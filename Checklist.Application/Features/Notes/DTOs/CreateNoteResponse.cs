@@ -1,6 +1,6 @@
-﻿namespace Checklist.Application.Features.Checklists.DTOs
+﻿namespace Checklist.Application.Features.Notes.DTOs
 {
-    public class NoteChecklistResponse
+    public class CreateNoteResponse
     {
         public Guid Id { get; set; }
         public string Message { get; set; } = string.Empty;

@@ -41,14 +41,13 @@ public class ChecklistController : ControllerBase
     /// <param name="request">Dados do checklist a ser criado.</param>
     /// <returns>Checklist criado com sucesso.</returns>
     [HttpPost]
-    [ProducesResponseType(typeof(CreateChecklistResponse), StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(NoteChecklistResponse), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> Create([FromBody] CreateChecklistRequest request)
     {
         var response = await _service.CreateAsync(UserId, request);
 
-        //return CreatedAtAction(nameof(Create), new { id = response.Id }, response);
         return StatusCode(StatusCodes.Status201Created, response);
     }
 

@@ -20,5 +20,18 @@ namespace Checklist.Infrastructure.Persistence.Repositories
                 .Where(n => n.Checklist.UserId == userId)
                 .ToListAsync();
         }
+
+        public async Task CreateAsync(Domain.Entities.Note note)
+        {
+            await _context.Notes.AddAsync(note);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<bool> CheckChecklistOwnershipAsync(Guid userId, Guid checklistId)
+        {
+            return await _context.Checklists
+                .AsNoTracking()
+                .AnyAsync(c => c.Id == checklistId && c.UserId == userId);
+        }
     }
 }

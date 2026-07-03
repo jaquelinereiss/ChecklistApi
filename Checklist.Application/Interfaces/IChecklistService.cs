@@ -5,7 +5,7 @@ namespace Checklist.Application.Interfaces;
 public interface IChecklistService
 {
     Task<List<GetChecklistResponse>> GetAllAsync(Guid userId);
-    Task<CreateChecklistResponse> CreateAsync(Guid userId, CreateChecklistRequest request);
+    Task<NoteChecklistResponse> CreateAsync(Guid userId, CreateChecklistRequest request);
     Task UpdateAsync(Guid userId, Guid checklistId, UpdateChecklistRequest request);
     Task DeleteAsync(Guid userId, Guid checklistId);
 }

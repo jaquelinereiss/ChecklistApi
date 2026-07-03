@@ -34,5 +34,21 @@ namespace Checklist.Api.Controllers
 
             return Ok(result);
         }
+
+        /// <summary>
+        /// Cria um nova nota para o usuário autenticado.
+        /// </summary>
+        /// <param name="request">Dados da nota a ser criada.</param>
+        /// <returns>Nota criada com sucesso.</returns>
+        [HttpPost("{checklistId:guid}")]
+        [ProducesResponseType(typeof(CreateNoteResponse), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Create(Guid checklistId, [FromBody] CreateNoteRequest request)
+        {
+            var response = await _service.CreateAsync(UserId, checklistId, request);
+
+            return CreatedAtAction(nameof(Create), new { id = response.Id }, response);
+        }
     }
 }
