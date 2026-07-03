@@ -22,8 +22,6 @@ public class ChecklistConfiguration
             .HasMaxLength(200)
             .IsRequired();
 
-        builder.HasQueryFilter(x => !x.IsDeleted);
-
         //builder.HasMany(x => x.Notes)
         //    .WithOne(x => x.Checklist)
         //    .HasForeignKey(x => x.ChecklistId)
