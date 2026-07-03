@@ -25,7 +25,7 @@ public class ChecklistService : IChecklistService
         }).ToList();
     }
 
-    public async Task<CreateChecklistResponse> CreateAsync(Guid userId, CreateChecklistRequest request)
+    public async Task<NoteChecklistResponse> CreateAsync(Guid userId, CreateChecklistRequest request)
     {
         var checklist = new Domain.Entities.Checklist
         {
@@ -37,7 +37,7 @@ public class ChecklistService : IChecklistService
 
         await _repository.CreateAsync(checklist);
 
-        return new CreateChecklistResponse
+        return new NoteChecklistResponse
         {
             Id = checklist.Id,
             Message = "Checklist criado com sucesso."

@@ -1,5 +1,7 @@
-﻿using Checklist.Application.Features.Notes.DTOs;
+﻿using Checklist.Application.Exceptions;
+using Checklist.Application.Features.Notes.DTOs;
 using Checklist.Application.Interfaces;
+using Checklist.Domain.Enums;
 
 namespace Checklist.Application.Services
 {
@@ -24,6 +26,31 @@ namespace Checklist.Application.Services
                 CreatedAt = x.CreatedAt,
                 ChecklistId = x.ChecklistId
             }).ToList();
+        }
+
+        public async Task<CreateNoteResponse> CreateAsync(Guid userId, Guid checklistId, CreateNoteRequest request)
+        {
+            var checklistExists = await _repository.CheckChecklistOwnershipAsync(userId, checklistId);
+
+            if (!checklistExists)
+                throw new NotFoundException("Checklist não encontrado ou não pertence ao usuário.");
+
+            var note = new Domain.Entities.Note
+            {
+                Id = Guid.NewGuid(),
+                Title = request.Title,
+                ChecklistId = checklistId,
+                Status = NoteStatus.Pending,
+                CreatedAt = DateTime.UtcNow,
+            };
+
+            await _repository.CreateAsync(note);
+
+            return new CreateNoteResponse
+            {
+                Id = note.Id,
+                Message = "Nota criada com sucesso."
+            };
         }
     }
 }
