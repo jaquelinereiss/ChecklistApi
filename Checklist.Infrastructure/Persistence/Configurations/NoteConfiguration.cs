@@ -4,11 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Checklist.Infrastructure.Persistence.Configurations;
 
-public class NoteConfiguration
-    : IEntityTypeConfiguration<Note>
+public class NoteConfiguration : IEntityTypeConfiguration<Note>
 {
-    public void Configure(
-        EntityTypeBuilder<Note> builder)
+    public void Configure(EntityTypeBuilder<Note> builder)
     {
         builder.ToTable("NOTES");
 
@@ -20,6 +18,11 @@ public class NoteConfiguration
 
         builder.Property(x => x.Status)
             .IsRequired();
+
+        builder.HasOne(x => x.Checklist)
+        .WithMany(x => x.Notes)
+        .HasForeignKey(x => x.ChecklistId)
+        .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasMany(x => x.SubNotes)
             .WithOne(x => x.Note)

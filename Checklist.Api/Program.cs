@@ -1,8 +1,6 @@
 using Checklist.Api.Extensions;
-using Checklist.Api.Middlewares;
 using Checklist.Infrastructure;
 using Checklist.Infrastructure.Persistence.Context;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
