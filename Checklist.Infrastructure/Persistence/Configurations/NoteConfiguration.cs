@@ -20,9 +20,9 @@ public class NoteConfiguration : IEntityTypeConfiguration<Note>
             .IsRequired();
 
         builder.HasOne(x => x.Checklist)
-        .WithMany(x => x.Notes)
-        .HasForeignKey(x => x.ChecklistId)
-        .OnDelete(DeleteBehavior.Cascade);
+            .WithMany(x => x.Notes)
+            .HasForeignKey(x => x.ChecklistId)
+            .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasMany(x => x.SubNotes)
             .WithOne(x => x.Note)

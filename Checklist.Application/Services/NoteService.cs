@@ -52,5 +52,16 @@ namespace Checklist.Application.Services
                 Message = "Nota criada com sucesso."
             };
         }
+
+        public async Task UpdateAsync(Guid userId, Guid noteId, UpdateNoteRequest request)
+        {
+            var note = await _repository.GetByIdAsync(userId, noteId) ?? throw new NotFoundException("Nota não encontrada.");
+
+            note.Title = request.Title;
+            note.Status = request.Status;
+            note.UpdatedAt = DateTime.UtcNow;
+
+            await _repository.UpdateAsync(note);
+        }
     }
 }
