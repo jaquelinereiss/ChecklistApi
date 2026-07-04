@@ -24,5 +24,9 @@ public class ApplicationDbContext : DbContext
 
         builder.ApplyConfigurationsFromAssembly(
             typeof(ApplicationDbContext).Assembly);
+
+        builder.Entity<ChecklistEntity>().ToTable("CHECKLISTS");
+        builder.Entity<Note>().ToTable("NOTES");
+        builder.Entity<SubNote>().ToTable("SUBNOTES");
     }
 }

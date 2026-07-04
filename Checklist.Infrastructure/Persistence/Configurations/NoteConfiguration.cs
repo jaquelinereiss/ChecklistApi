@@ -27,6 +27,6 @@ public class NoteConfiguration : IEntityTypeConfiguration<Note>
         builder.HasMany(x => x.SubNotes)
             .WithOne(x => x.Note)
             .HasForeignKey(x => x.NoteId)
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }
