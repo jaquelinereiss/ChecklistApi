@@ -6,29 +6,28 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Checklist.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class InitialBaseline : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Checklists",
+                name: "CHECKLISTS",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    OwnerId = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", maxLength: 200, nullable: false),
                     Title = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Checklists", x => x.Id);
+                    table.PrimaryKey("PK_CHECKLISTS", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Notes",
+                name: "NOTES",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -36,22 +35,21 @@ namespace Checklist.Infrastructure.Migrations
                     Status = table.Column<int>(type: "integer", nullable: false),
                     ChecklistId = table.Column<Guid>(type: "uuid", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Notes", x => x.Id);
+                    table.PrimaryKey("PK_NOTES", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Notes_Checklists_ChecklistId",
+                        name: "FK_NOTES_CHECKLISTS_ChecklistId",
                         column: x => x.ChecklistId,
-                        principalTable: "Checklists",
+                        principalTable: "CHECKLISTS",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "SubNotes",
+                name: "SUBNOTES",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -59,28 +57,27 @@ namespace Checklist.Infrastructure.Migrations
                     Status = table.Column<int>(type: "integer", nullable: false),
                     NoteId = table.Column<Guid>(type: "uuid", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SubNotes", x => x.Id);
+                    table.PrimaryKey("PK_SUBNOTES", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SubNotes_Notes_NoteId",
+                        name: "FK_SUBNOTES_NOTES_NoteId",
                         column: x => x.NoteId,
-                        principalTable: "Notes",
+                        principalTable: "NOTES",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Notes_ChecklistId",
-                table: "Notes",
+                name: "IX_NOTES_ChecklistId",
+                table: "NOTES",
                 column: "ChecklistId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SubNotes_NoteId",
-                table: "SubNotes",
+                name: "IX_SUBNOTES_NoteId",
+                table: "SUBNOTES",
                 column: "NoteId");
         }
 
@@ -88,13 +85,13 @@ namespace Checklist.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "SubNotes");
+                name: "SUBNOTES");
 
             migrationBuilder.DropTable(
-                name: "Notes");
+                name: "NOTES");
 
             migrationBuilder.DropTable(
-                name: "Checklists");
+                name: "CHECKLISTS");
         }
     }
 }

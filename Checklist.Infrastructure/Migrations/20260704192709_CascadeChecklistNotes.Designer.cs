@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Checklist.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260611174219_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20260704192709_CascadeChecklistNotes")]
+    partial class CascadeChecklistNotes
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,14 +34,6 @@ namespace Checklist.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("OwnerId")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(200)
@@ -50,9 +42,13 @@ namespace Checklist.Infrastructure.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid>("UserId")
+                        .HasMaxLength(200)
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Checklists", (string)null);
+                    b.ToTable("CHECKLISTS", (string)null);
                 });
 
             modelBuilder.Entity("Checklist.Domain.Entities.Note", b =>
@@ -66,9 +62,6 @@ namespace Checklist.Infrastructure.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("boolean");
 
                     b.Property<int>("Status")
                         .HasColumnType("integer");
@@ -85,7 +78,7 @@ namespace Checklist.Infrastructure.Migrations
 
                     b.HasIndex("ChecklistId");
 
-                    b.ToTable("Notes", (string)null);
+                    b.ToTable("NOTES", (string)null);
                 });
 
             modelBuilder.Entity("Checklist.Domain.Entities.SubNote", b =>
@@ -96,9 +89,6 @@ namespace Checklist.Infrastructure.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("boolean");
 
                     b.Property<Guid>("NoteId")
                         .HasColumnType("uuid");
@@ -118,7 +108,7 @@ namespace Checklist.Infrastructure.Migrations
 
                     b.HasIndex("NoteId");
 
-                    b.ToTable("SubNotes", (string)null);
+                    b.ToTable("SUBNOTES", (string)null);
                 });
 
             modelBuilder.Entity("Checklist.Domain.Entities.Note", b =>
@@ -126,7 +116,7 @@ namespace Checklist.Infrastructure.Migrations
                     b.HasOne("Checklist.Domain.Entities.Checklist", "Checklist")
                         .WithMany("Notes")
                         .HasForeignKey("ChecklistId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Checklist");
@@ -137,7 +127,7 @@ namespace Checklist.Infrastructure.Migrations
                     b.HasOne("Checklist.Domain.Entities.Note", "Note")
                         .WithMany("SubNotes")
                         .HasForeignKey("NoteId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Note");
