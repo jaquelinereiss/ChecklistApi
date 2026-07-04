@@ -6,5 +6,6 @@ namespace Checklist.Application.Interfaces
     {
         Task<List<GetNoteResponse>> GetAllAsync(Guid userId);
         Task<CreateNoteResponse> CreateAsync(Guid userId, Guid checklistId, CreateNoteRequest request);
+        Task UpdateAsync(Guid userId, Guid noteId, UpdateNoteRequest request);
     }
 }

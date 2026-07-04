@@ -50,5 +50,24 @@ namespace Checklist.Api.Controllers
 
             return CreatedAtAction(nameof(Create), new { id = response.Id }, response);
         }
+
+        /// <summary>
+        /// Atualiza uma nota do usuário autenticado.
+        /// </summary>
+        /// <param name="id">Identificador da nota.</param>
+        /// <param name="request">Dados para atualização da nota.</param>
+        /// <returns>Nota atualizada com sucesso.</returns>
+        [HttpPut("{id:guid}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Update(Guid id, [FromBody] UpdateNoteRequest request)
+        {
+            await _service.UpdateAsync(UserId, id, request);
+
+            return NoContent();
+        }
     }
 }
